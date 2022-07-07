@@ -1,14 +1,13 @@
 import request from '@/utils/request'
 
-export const registerAPI = () => {
-  // 这里先用这个接口测试下, 如果url以http开头会忽略baseURL, axios直接请求此地址
+export const registerAPI = ({ username, password, repassword }) => {
   return request({
-    url: 'api/reg',
-    method: 'POST',
+    url: '/api/reg',
+    method: 'post',
     data: {
-      username: 'yuiri1',
-      password: '123456',
-      repassword: '123456'
+      username,
+      password,
+      repassword
     }
   })
 }

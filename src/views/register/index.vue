@@ -11,10 +11,10 @@
         <el-input placeholder="请输入用户名" v-model="form.username"></el-input>
       </el-form-item>
       <el-form-item prop="password">
-        <el-input placeholder="请输入密码" v-model="form.password"></el-input>
+        <el-input type="password" placeholder="请输入密码" v-model="form.password"></el-input>
       </el-form-item>
       <el-form-item prop="repassword">
-        <el-input placeholder="请再次确认密码" v-model="form.repassword"></el-input>
+        <el-input type="password" placeholder="请再次确认密码" v-model="form.repassword"></el-input>
       </el-form-item>
       <el-form-item>
         <el-button class="btn-reg" type="primary" @click="registerFn">注册</el-button>
@@ -26,6 +26,7 @@
 </template>
 
 <script>
+import { registerAPI } from '@/api'
 export default {
   name: 'my-register',
   data () {
@@ -71,10 +72,20 @@ export default {
   },
   methods: {
     registerFn () {
-      this.$refs.regRef.validate(valid => {
+      this.$refs.regRef.validate(async valid => {
         if (!valid) return false
         // 尝试拿到用户输入的内容
         console.log(this.form)
+
+        // 1. 调用注册接口
+        const { data: res } = await registerAPI(this.form)
+        console.log(res)
+        // 2. 注册失败，提示用户
+        if (res.code !== 0) return this.$message.error(res.message)
+        // 3. 注册成功，提示用户
+        this.$message.success(res.message)
+        // 4. 跳转到登录页面
+        this.$router.push('/login')
       })
     }
   }
