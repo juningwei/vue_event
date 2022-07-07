@@ -6,7 +6,7 @@
      <!-- 标题的盒子 -->
      <div class="title-box"></div>
      <!-- 注册的表单区域 -->
-     <el-form ref="form" :model="form" :rules="rulesObj">
+     <el-form ref="regRef" :model="form" :rules="rulesObj">
       <el-form-item prop="username">
         <el-input placeholder="请输入用户名" v-model="form.username"></el-input>
       </el-form-item>
@@ -30,7 +30,7 @@ export default {
   name: 'my-register',
   data () {
     const samePwd = (rule, value, callback) => {
-      if (value !== this.regForm.password) {
+      if (value !== this.form.password) {
         // 如果验证失败，则调用 回调函数时，指定一个 Error 对象。
         callback(new Error('两次输入的密码不一致!'))
       } else {
@@ -67,6 +67,15 @@ export default {
           { validator: samePwd, trigger: 'blur' }
         ]
       }
+    }
+  },
+  methods: {
+    registerFn () {
+      this.$refs.regRef.validate(valid => {
+        if (!valid) return false
+        // 尝试拿到用户输入的内容
+        console.log(this.form)
+      })
     }
   }
 }
