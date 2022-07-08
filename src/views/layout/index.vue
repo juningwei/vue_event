@@ -41,6 +41,52 @@
           <img src="../../assets/images/logo.png" alt="" v-else />
           <span>欢迎 {{ nickname || username }}</span>
         </div>
+        <!-- 左侧导航菜单 -->
+        <el-menu
+          default-active="/home"
+          class="el-menu-vertical-demo"
+          @open="handleOpen"
+          @close="handleClose"
+          background-color="#23262E"
+          text-color="#fff"
+          active-text-color="#409EFF"
+          unique-opened
+        >
+          <!-- 不包含子菜单的“一级菜单” -->
+          <el-menu-item index="/home">
+            <i class="el-icon-s-home"></i>
+            <span>首页</span>
+          </el-menu-item>
+          <!-- 包含子菜单的“一级菜单” -->
+          <el-submenu index="/topic">
+            <template slot="title">
+              <i class="el-icon-s-order"></i>
+              <span>文章管理</span>
+            </template>
+            <el-menu-item index="/topic1">
+              <i class="el-icon-s-home"></i>
+              <span>文章1</span>
+            </el-menu-item>
+            <el-menu-item index="/topic1">
+              <i class="el-icon-s-home"></i>
+              <span>文章2</span>
+            </el-menu-item>
+          </el-submenu>
+          <el-submenu index="/my">
+            <template slot="title">
+              <i class="el-icon-s-order"></i>
+              <span>个人中心</span>
+            </template>
+            <el-menu-item index="/my1">
+              <i class="el-icon-s-home"></i>
+              <span>1</span>
+            </el-menu-item>
+            <el-menu-item index="/my2">
+              <i class="el-icon-s-home"></i>
+              <span>2</span>
+            </el-menu-item>
+          </el-submenu>
+        </el-menu>
       </el-aside>
       <el-container>
         <!-- 页面主体区域 -->
@@ -117,24 +163,24 @@ export default {
 }
 
 .user-box {
- height: 70px;
- display: flex;
- justify-content: center;
- align-items: center;
- border-top: 1px solid #000;
- border-bottom: 1px solid #000;
- user-select: none;
- img {
-   width: 35px;
-   height: 35px;
-   border-radius: 50%;
-   background-color: #fff;
-   margin-right: 15px;
-   object-fit: cover;
- }
- span {
-   color: white;
-   font-size: 12px;
- }
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top: 1px solid #000;
+  border-bottom: 1px solid #000;
+  user-select: none;
+  img {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background-color: #fff;
+    margin-right: 15px;
+    object-fit: cover;
+  }
+  span {
+    color: white;
+    font-size: 12px;
+  }
 }
 </style>
