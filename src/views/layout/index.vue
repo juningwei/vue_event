@@ -53,6 +53,8 @@ export default {
         // TODO：执行退出登录的操作
         // 1. 清空 token
         this.$store.commit('updateToken', '')
+        this.$store.commit('updateUserInfo', {})
+
         // 2. 跳转到登录页面
         this.$router.push('/login')
       }).catch(() => {
